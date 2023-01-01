@@ -1,6 +1,6 @@
     - name: copy pom.xml file to managed server
       copy:
-        src: /home/devops/practive/pom.xml
+        src: /home/devops/practice/pom.xml
         dest: /home/devops/pom.xml
 
     - name: update pom.xml
