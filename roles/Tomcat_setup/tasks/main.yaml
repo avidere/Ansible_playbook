@@ -17,7 +17,7 @@
         path: /opt/tomcat
         owner: devops
         group: devops
-        mode: 777
+        mode: "u+rwx,g+rx,o=rx"
         recurse: yes
 
     - name: download tomcat
@@ -37,9 +37,10 @@
       become: yes
       file:
         path: /opt/tomcat/apache-tomcat-10.0.8
-        owner: jenkins
-        group: jenkins
-        mode: 777
+        owner: devops
+        group: devops
+        mode: "u+rwx,g+rx,o=rx"
+        recurse: yes
         state: directory
 
     - name: crate tomcat user.xml
