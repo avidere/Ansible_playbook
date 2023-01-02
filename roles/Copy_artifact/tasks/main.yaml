@@ -1,6 +1,7 @@
+
     - name: copy pom.xml file to managed server
       copy:
-        src: /home/devops/practice/pom.xml
+        src: /home/devops/pom.xml
         dest: /home/devops/pom.xml
 
     - name: update pom.xml
@@ -26,13 +27,13 @@
         var: my_variable
 
     - name: Download artifact from Nexus repository
-      maven_artifact:
-        group_id: "{{ group_id }}"
-        artifact_id: "{{ artifact_id }}"
-        version: "{{my_variable}}"
-        repository_url: "http://{{nexus_host}}/repository/demoproject-Release/"
-        dest: /home/devops
+      get_url:
+        url: "http://{{ nexus_server }}/repository/{{ nexus_repository }}/{{ group_id }}/{{ artifact_id }}/{{ version }}/{{ artifact_id }}-{{ version }}.war"
+        dest: /opt/tomcat/apache-tomcat-10.0.8/webapps/{{ artifact_id }}-{{ version }}.war
+
       vars:
-        group_id: "com.example"
-        artifact_id: "springboot"
-        nexus_host: "35.78.217.218:8081"
+        group_id: "example/demo"
+        version: "{{my_variable}}"
+        nexus_repository: "tomcat-Release"
+        artifact_id: "helloworld"
+        nexus_server: "18.183.95.23:8081"
